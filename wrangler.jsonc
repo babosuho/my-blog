@@ -14,7 +14,7 @@
 		"enabled": true
 	},
 	"vars": {
-		"GITHUB_CLIENT_ID": "Ov23liit22zIP1HWCe7vv"
+		"GITHUB_CLIENT_ID": "Ov23lit22zIP1HWCe7vv"
 	},
 	"secrets": ["GITHUB_CLIENT_SECRET"]
 }
