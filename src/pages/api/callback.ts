@@ -10,6 +10,10 @@ export const GET: APIRoute = async (context) => {
   const { searchParams } = new URL(context.request.url);
   const code = searchParams.get("code");
 
+  if (!code) {
+    return new Response("Missing code parameter", { status: 400 });
+  }
+
   const response = await fetch("https://github.com/login/oauth/access_token", {
     method: "POST",
     headers: {
@@ -24,22 +28,31 @@ export const GET: APIRoute = async (context) => {
   });
 
   const data = await response.json();
+
+  if (data.error) {
+    return new Response(`OAuth error: ${data.error_description}`, { status: 400 });
+  }
+
   const token = data.access_token;
-  const provider = "github";
 
   const html = `
+    <!DOCTYPE html>
     <html>
+      <head><title>OAuth Callback</title></head>
       <body>
         <script>
-          const token = "${token}";
-          const provider = "${provider}";
-          if (window.opener) {
-            window.opener.postMessage(
-              'authorization:' + provider + ':success:' + JSON.stringify({token, provider}),
-              window.location.origin
-            );
-            window.close();
-          }
+          (function() {
+            function receiveMessage(e) {
+              console.log("receiveMessage %o", e);
+              window.opener.postMessage(
+                'authorization:github:success:{"token":"${token}","provider":"github"}',
+                e.origin
+              );
+              window.removeEventListener("message", receiveMessage, false);
+            }
+            window.addEventListener("message", receiveMessage, false);
+            window.opener.postMessage("authorizing:github", "*");
+          })();
         </script>
       </body>
     </html>
