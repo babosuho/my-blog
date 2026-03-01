@@ -1,0 +1,39 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  updatedDate?: Date;
+  url: string;
+  image?: string;
+}
+
+const { title, description, pubDate, updatedDate, url, image } = Astro.props;
+
+const siteUrl = 'https://my-blog-pages-a94.pages.dev';
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": pubDate.toISOString(),
+  "dateModified": (updatedDate || pubDate).toISOString(),
+  "url": url,
+  "author": {
+    "@type": "Person",
+    "name": "블로그 저자명",
+    "url": `${siteUrl}/about`,
+    "jobTitle": "웹디자인/개발 전문가",
+    "description": "30년 경력의 웹디자인, 웹개발, 디지털마케팅 전문가"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "My Blog",
+    "url": siteUrl
+  },
+  ...(image ? { "image": `${siteUrl}${image}` } : {})
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
