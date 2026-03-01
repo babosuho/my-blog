@@ -1,120 +1,33 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-
-const title = "About - 저자 소개";
-const description = "웹디자인, 웹개발, 디지털마케팅 분야 30년 경력 전문가 소개";
-const siteUrl = "https://my-blog-pages-a94.pages.dev";
-
-const personSchema = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "저자명",
-  "url": `${siteUrl}/about`,
-  "jobTitle": "웹디자인/개발/디지털마케팅 전문가",
-  "description": "30년 경력의 웹디자인, 웹개발, 디지털마케팅, 시각디자인, 편집디자인, 프리젠테이션 전문가",
-  "knowsAbout": [
-    "웹디자인", "웹개발", "SEO", "디지털마케팅",
-    "시각디자인", "편집디자인", "프리젠테이션",
-    "Astro", "HTML", "CSS", "JavaScript"
-  ],
-  "sameAs": []
-};
+import Layout from '../layouts/BlogPost.astro';
 ---
 
-<html lang="ko">
-  <head>
-    <BaseHead title={title} description={description} />
-    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
-    <style>
-      main {
-        width: 720px;
-        max-width: calc(100% - 2em);
-        margin: auto;
-        padding: 2em 1em;
-        color: rgb(var(--gray-dark));
-      }
-      h1 {
-        margin-bottom: 0.5em;
-      }
-      .subtitle {
-        color: rgb(var(--gray));
-        font-size: 1.1em;
-        margin-bottom: 2em;
-      }
-      section {
-        margin-bottom: 2em;
-      }
-      section h2 {
-        margin-bottom: 0.5em;
-        border-bottom: 1px solid rgb(var(--gray-light));
-        padding-bottom: 0.3em;
-      }
-      .skills {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5em;
-        margin-top: 0.5em;
-      }
-      .skill-tag {
-        background: rgb(var(--gray-light));
-        padding: 0.3em 0.8em;
-        border-radius: 20px;
-        font-size: 0.9em;
-      }
-    </style>
-  </head>
+<Layout
+  title="바보수호 소개"
+  description="디지털 기술로 세상을 연결하는 전문가 바보수호의 프로필"
+  pubDate={new Date('2026-03-01')}
+>
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "바보수호",
+    "alternateName": "BaboSuho",
+    "url": "https://my-blog-pages-a94.pages.dev/about",
+    "jobTitle": "디지털마케팅/웹개발/웹디자인/공공 디지털전환 전문가",
+    "description": "디지털 기술로 세상을 연결하는 20년 경력의 전문가. 디지털기술, 커뮤니티 리더십, 사회공헌을 다룹니다.",
+    "knowsAbout": ["디지털기술", "커뮤니티 리더십", "사회공헌", "웹디자인", "웹개발", "디지털마케팅", "SEO", "GEO", "AI", "디지털전환"],
+    "sameAs": [
+      "https://github.com/babosuho"
+    ]
+  })} />
 
-  <body>
-    <Header />
-    <main>
-      <h1>저자 소개</h1>
-      <p class="subtitle">웹디자인/개발/디지털마케팅 전문가 · 경력 30년+</p>
+  <p>안녕하세요, <strong>바보수호</strong>입니다.</p>
 
-      <section>
-        <h2>About Me</h2>
-        <p>
-          30년 이상 웹디자인, 웹개발, 디지털마케팅 분야에서 활동하며
-          다양한 프로젝트를 수행해왔습니다.
-          이 블로그에서는 오랜 실무 경험을 바탕으로
-          웹 기술, SEO, 디자인 트렌드에 대한 인사이트를 공유합니다.
-        </p>
-      </section>
+  <p>20년간 디지털마케팅, 웹개발, 웹디자인, 공공 디지털전환 분야에서 활동해 왔습니다. 디지털 기술로 세상을 연결하는 것이 제가 하는 일입니다.</p>
 
-      <section>
-        <h2>전문 분야</h2>
-        <div class="skills">
-          <span class="skill-tag">웹디자인</span>
-          <span class="skill-tag">웹개발</span>
-          <span class="skill-tag">SEO / GEO</span>
-          <span class="skill-tag">디지털마케팅</span>
-          <span class="skill-tag">시각디자인</span>
-          <span class="skill-tag">편집디자인</span>
-          <span class="skill-tag">프리젠테이션</span>
-          <span class="skill-tag">HTML / CSS / JS</span>
-          <span class="skill-tag">Astro</span>
-          <span class="skill-tag">Cloudflare</span>
-        </div>
-      </section>
+  <h2>이 블로그에서 다루는 주제</h2>
+  <p>디지털기술, 커뮤니티 리더십, 사회공헌을 중심으로 AI, 디지털전환, 웹서비스, 공공DX에 대한 실전 경험과 인사이트를 공유합니다.</p>
 
-      <section>
-        <h2>이 블로그의 목적</h2>
-        <p>
-          급변하는 웹 기술 환경에서 실무에 바로 적용할 수 있는 정보를 제공합니다.
-          특히 SEO와 AI 검색 최적화(GEO)에 초점을 맞춰,
-          검색엔진과 AI 모두에게 선택받는 콘텐츠 제작 방법을 다룹니다.
-        </p>
-      </section>
-
-      <section>
-        <h2>연락처</h2>
-        <p>
-          협업 및 문의는 블로그를 통해 연락주세요.
-        </p>
-      </section>
-    </main>
-    <Footer />
-    <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "b7f32625e2f74d269d41b3b5bac11887"}'></script>
-  </body>
-</html>
+  <h2>블로그의 목표</h2>
+  <p>기술이 사람과 사회를 연결하는 도구가 되도록, 누구나 이해할 수 있는 실용적인 콘텐츠를 만드는 것이 목표입니다.</p>
+</Layout>
